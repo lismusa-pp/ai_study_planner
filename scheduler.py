@@ -1,17 +1,5 @@
 from agents import time_agent, goal_agent, mood_agent, progress_tracker
 from dashboard import display_schedule
-
-def run_daily_schedule():
-    print("🧠 AI Study Planner Running...\n")
-    
-    mood = mood_agent.analyze_mood()
-    tasks = goal_agent.prioritize_tasks()
-    adjusted_tasks = progress_tracker.adjust_tasks(tasks)
-    schedule = time_agent.create_schedule(adjusted_tasks, mood)
-
-    display_schedule(schedule)
-
-
 from datetime import datetime
 import json
 
@@ -25,6 +13,24 @@ def log_completion(subject):
     with open("data/study_log.json", "a") as f:
         f.write(json.dumps(log) + "\n")
 
-# Replace this in run_daily_schedule:
-for block in schedule:
-    log_completion(block["subject"])
+def run_daily_schedule():
+    print("🧠 AI Study Planner Running...\n")
+
+    # Step 1: Get mood from GUI
+    mood = mood_agent.analyze_mood()
+
+    # Step 2: Get and prioritize tasks
+    tasks = goal_agent.prioritize_tasks()
+
+    # Step 3: Adjust tasks based on past performance
+    adjusted_tasks = progress_tracker.adjust_tasks(tasks)
+
+    # ✅ Step 4: Create the schedule — make sure this line exists!
+    schedule = time_agent.create_schedule(adjusted_tasks, mood)
+
+    # Step 5: Display it
+    display_schedule(schedule)
+
+    # Step 6: Ask user for completion input
+    for block in schedule:
+        log_completion(block["subject"])
