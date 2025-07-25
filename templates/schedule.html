@@ -2,20 +2,20 @@
 <html>
 <head>
     <title>Today's Study Schedule</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Today's Study Schedule</h1>
-    <form method="post">
-        {% for block in schedule %}
-        <div>
-            <input type="checkbox" id="{{ block.subject }}" name="completed" value="{{ block.subject }}">
-            <label for="{{ block.subject }}">{{ block.subject }} — {{ block.start }} to {{ block.end }}</label>
-        </div>
-        {% endfor %}
-        <br>
-        <button type="submit">Submit Completed Sessions</button>
-    </form>
+    <div class="container">
+        <h1>Today's Study Schedule</h1>
+        <form method="post">
+            {% for block in schedule %}
+            <div>
+                <input type="checkbox" id="{{ block.subject }}" name="completed" value="{{ block.subject }}">
+                <label for="{{ block.subject }}">{{ block.subject }} — {{ block.start }} to {{ block.end }}</label>
+            </div>
+            {% endfor %}
+            <button type="submit">Submit Completed Sessions</button>
+        </form>
+    </div>
 </body>
 </html>
-
-
