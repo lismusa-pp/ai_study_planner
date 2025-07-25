@@ -18,6 +18,10 @@ def save_log(filename, data):
     with open(filename, "a") as f:
         f.write(json.dumps(data) + "\n")
 
+@app.route('/schedule')
+def schedule():
+    return render_template('schedule.html')        
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
