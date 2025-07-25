@@ -5,15 +5,13 @@ def adjust_tasks(tasks):
     try:
         with open("data/study_log.json", "r") as f:
             logs = [json.loads(line) for line in f.readlines()]
-    except:
+    except FileNotFoundError:
         logs = []
 
-    completed = sum(1 for log in logs[-5:] if log["completed"])  # last 5 days
-    recent_success = completed / max(1, len(logs[-5:]))
+    completed_count = sum(1 for log in logs[-5:] if log.get("completed"))
+    recent_success = completed_count / max(1, len(logs[-5:]))
 
     if recent_success < 0.5:
-        print("⚠️ You're falling behind. Fewer tasks suggested today.")
+        print("⚠️ Falling behind, reducing today's tasks.")
         return tasks[:len(tasks)//2]
     return tasks
-
-

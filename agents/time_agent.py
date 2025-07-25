@@ -1,22 +1,22 @@
 from datetime import datetime, timedelta
 
 def create_schedule(tasks, mood):
-    pomodoro = 25  # minutes
-    break_time = 5
+    pomodoro_duration = 25  # minutes
+    break_duration = 5      # minutes
+    total_blocks = 6 if mood >= 3 else 3
 
-    total_blocks = 6 if mood >= 3 else 3  # more energy = more sessions
     now = datetime.now()
     schedule = []
 
     for i in range(min(total_blocks, len(tasks))):
         task = tasks[i]
-        start = now
-        end = now + timedelta(minutes=pomodoro)
+        start_time = now
+        end_time = now + timedelta(minutes=pomodoro_duration)
         schedule.append({
             "subject": task["name"],
-            "start": start.strftime("%H:%M"),
-            "end": end.strftime("%H:%M")
+            "start": start_time.strftime("%H:%M"),
+            "end": end_time.strftime("%H:%M")
         })
-        now = end + timedelta(minutes=break_time)
+        now = end_time + timedelta(minutes=break_duration)
 
     return schedule
