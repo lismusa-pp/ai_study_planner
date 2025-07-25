@@ -10,3 +10,21 @@ def run_daily_schedule():
     schedule = time_agent.create_schedule(adjusted_tasks, mood)
 
     display_schedule(schedule)
+
+
+from datetime import datetime
+import json
+
+def log_completion(subject):
+    completed = input(f"✅ Did you complete '{subject}'? (y/n): ").lower().startswith("y")
+    log = {
+        "date": datetime.now().isoformat(),
+        "subject": subject,
+        "completed": completed
+    }
+    with open("data/study_log.json", "a") as f:
+        f.write(json.dumps(log) + "\n")
+
+# Replace this in run_daily_schedule:
+for block in schedule:
+    log_completion(block["subject"])
