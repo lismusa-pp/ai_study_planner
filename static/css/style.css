@@ -1,0 +1,108 @@
+/* Base Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eef1f7;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Container */
+.container {
+    max-width: 700px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    margin-bottom: 35px;
+    font-size: 28px;
+    color: #2b3a67;
+}
+
+/* Form Layout */
+.schedule-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Individual Session Card */
+.session-card {
+    display: flex;
+    align-items: center;
+    background-color: #f8faff;
+    border-left: 6px solid #4a90e2;
+    border-radius: 12px;
+    padding: 15px 20px;
+    transition: background-color 0.3s ease;
+}
+
+.session-card:hover {
+    background-color: #e6efff;
+}
+
+/* Checkbox */
+.session-card input[type="checkbox"] {
+    margin-right: 15px;
+    transform: scale(1.4);
+    accent-color: #4a90e2;
+    cursor: pointer;
+}
+
+/* Session Info */
+.session-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.session-info h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #2b3a67;
+}
+
+.session-info p {
+    margin: 4px 0 0;
+    font-size: 14px;
+    color: #5c6b82;
+}
+
+/* Submit Button */
+.submit-btn {
+    margin-top: 30px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #4a90e2;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #3977c3;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        margin: 20px;
+        padding: 25px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .submit-btn {
+        width: 100%;
+    }
+}

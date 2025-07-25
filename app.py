@@ -18,9 +18,9 @@ def save_log(filename, data):
     with open(filename, "a") as f:
         f.write(json.dumps(data) + "\n")
 
-@app.route('/schedule')
-def schedule():
-    return render_template('schedule.html')        
+@app.route("/plain-schedule")  # Renamed to avoid conflict
+def plain_schedule():
+    return render_template("schedule.html")
 
 @app.route("/", methods=["GET", "POST"])
 def index():
