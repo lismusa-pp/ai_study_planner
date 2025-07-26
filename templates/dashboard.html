@@ -1,27 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Study Progress Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Study Planner - Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>
-<body>
-    <div class="container">
-        <h1>Study Progress Dashboard</h1>
-        <table>
-            <tr>
-                <th>Date</th>
-                <th>Subject</th>
-                <th>Completed</th>
-            </tr>
-            {% for log in logs %}
-            <tr>
-                <td>{{ log.date }}</td>
-                <td>{{ log.subject }}</td>
-                <td>{{ "✅" if log.completed else "❌" }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-        <a href="{{ url_for('index') }}">Back to Mood Input</a>
-    </div>
+<body class="bg-mountains">
+  <div class="container">
+    <h1>Dashboard</h1>
+    <h3>Your Study Progress Logs</h3>
+
+    {% if logs %}
+      {% for log in logs %}
+        <div class="log-entry">
+          <strong>{{ log.subject or "Mood" }}:</strong>
+          {% if log.completed is not none %}
+            Completed: {{ "Yes" if log.completed else "No" }}
+          {% else %}
+            Mood: {{ log.mood }}
+          {% endif %}
+          <br />
+          <small>{{ log.date | replace("T", " ") | slice(0, 19) }}</small>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>No progress logged yet.</p>
+    {% endif %}
+  </div>
 </body>
 </html>

@@ -1,16 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>AI Study Planner - Mood Input</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-<body>
-    <div class="container">
-        <h1>How do you feel today?</h1>
-        <form method="post">
-            <label for="mood">Rate your mood (1 = Tired, 5 = Energized):</label>
-            <input type="number" id="mood" name="mood" min="1" max="5" value="3" required>
-            <button type="submit">Submit Mood</button>
-        </form>
-    </div>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Study Planner - Mood Check</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body class="bg-mountains">
+    <audio id="bg-music" autoplay loop muted>
+  <source src="{{ url_for('static', filename='audio/background.mp3') }}" type="audio/mpeg" />
+  Your browser does not support the audio element.
+</audio>
+
+<button id="music-toggle" aria-label="Toggle background music" style="position: fixed; bottom: 20px; right: 20px; padding: 10px 15px; border: none; background: #3498db; color: white; border-radius: 5px; cursor: pointer; font-weight: bold;">
+  ▶️ Play Music
+</button>
+
+<script>
+  const music = document.getElementById('bg-music');
+  const btn = document.getElementById('music-toggle');
+
+  btn.addEventListener('click', () => {
+    if (music.paused) {
+      music.muted = false;   // unmute when playing
+      music.play();
+      btn.textContent = "⏸️ Pause Music";
+    } else {
+      music.pause();
+      btn.textContent = "▶️ Play Music";
+    }
+  });
+
+  // Optional: start muted, and play on first user interaction (click anywhere)
+  document.body.addEventListener('click', () => {
+    if (music.muted) {
+      music.muted = false;
+      music.play();
+      btn.textContent = "⏸️ Pause Music";
+    }
+  }, { once: true });
+</script>
+
+  <div class="container">
+    <h1>Welcome to AI Study Planner</h1>
+    <h3>How are you feeling today?</h3>
+
+    <form method="POST" action="{{ url_for('index') }}">
+      <label for="mood">Select your mood (1-5):</label>
+      <input
+        type="number"
+        id="mood"
+        name="mood"
+        min="1"
+        max="5"
+        required
+        placeholder="Enter a number from 1 (tired) to 5 (energized)"
+      />
+      <button type="submit">Continue</button>
+    </form>
+  </div>
 </body>
 </html>
