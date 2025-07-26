@@ -6,7 +6,20 @@ import os
 # Import your AI agent modules
 from agents import time_agent, goal_agent, mood_agent, progress_tracker
 
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
+
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
+
+
+
+
 app = Flask(__name__)
+
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///planner.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+db = SQLAlchemy(app)
 
 DATA_DIR = "data"
 MOOD_LOG_FILE = os.path.join(DATA_DIR, "mood_log.json")
